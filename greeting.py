@@ -1,0 +1,1 @@
+greeting = "Hello! I'm Archie the Architect. I can help you determine what technologies you need for your data architecture. Could you please tell me a bit about your project?"
