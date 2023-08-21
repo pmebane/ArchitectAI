@@ -1,7 +1,7 @@
 import streamlit as st
-from system_message import system_message
-from greeting import greeting
-from collect_messages import collect_messages
+from prompts.system_message import system_message
+from prompts.greeting import greeting
+from functions.collect_messages import collect_messages
 
 st.title('Welcome to ArchitectAI')
 
