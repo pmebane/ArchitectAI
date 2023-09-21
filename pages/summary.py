@@ -5,7 +5,7 @@ from prompts.create_extract_vendor_prompt import create_extract_vendor_prompt
 from prompts.create_generate_diagram_prompt import create_generate_diagram_prompt
 from functions.get_completion import get_completion
 
-if st.session_state.status == "Chat":
+if st.session_state.status == "Conversation in Progress":
     st.write("Please complete the conversation on the Chat page")
 
 # Conversation complete, now generate assets

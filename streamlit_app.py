@@ -19,14 +19,14 @@ show_pages(
 if "messages" not in st.session_state.keys():
     st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
 if "status" not in st.session_state.keys():
-    st.session_state.status = "Chat"
+    st.session_state.status = "Conversation in Progress"
 
 # Heading
 st.title('Welcome to ArchitectAI')
 
 if st.button("Clear History"):
     st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
-    st.session_state.status = "Chat"
+    st.session_state.status = "Conversation in Progress"
 
 # Display previous chat messages
 for message in st.session_state.messages[1:]:
