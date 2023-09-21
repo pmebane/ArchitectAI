@@ -3,8 +3,8 @@ from prompts.system_message import system_message
 from prompts.greeting import greeting
 from prompts.create_is_chat_complete_prompt import create_is_chat_complete_prompt
 from prompts.create_is_chat_complete_prompt import create_is_chat_complete_prompt
-from functions.collect_messages import collect_messages
 from functions.get_completion import get_completion
+from functions.get_completion_from_message import get_completion_from_messages
 from st_pages import Page, show_pages
 
 # Specify what pages should be shown in the sidebar, and what their titles should be
@@ -43,7 +43,7 @@ if prompt := st.chat_input():
 if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = collect_messages(st.session_state.messages) 
+            response = get_completion_from_messages(st.session_state.messages) 
             st.write(response) 
     message = {"role": "assistant", "content": response}
     st.session_state.messages.append(message)
