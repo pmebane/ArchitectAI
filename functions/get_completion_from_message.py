@@ -1,8 +1,8 @@
-from config import OPENAI_API_KEY
+import streamlit as st
 import openai
 
 def get_completion_from_messages(messages, model="gpt-4", temperature=0):
-    openai.api_key  = OPENAI_API_KEY
+    openai.api_key  = st.secrets["api_key"]
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
