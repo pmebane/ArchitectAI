@@ -2,7 +2,6 @@ import streamlit as st
 from prompts.system_message import system_message
 from prompts.greeting import greeting
 from prompts.create_is_chat_complete_prompt import create_is_chat_complete_prompt
-from prompts.create_is_chat_complete_prompt import create_is_chat_complete_prompt
 from functions.get_completion import get_completion
 from functions.get_completion_from_message import get_completion_from_messages
 from st_pages import Page, show_pages
