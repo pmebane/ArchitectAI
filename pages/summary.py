@@ -4,6 +4,7 @@ from prompts.create_extract_tech_prompt import create_extract_tech_prompt
 from prompts.create_generate_diagram_prompt import create_generate_diagram_prompt
 from functions.get_completion import get_completion
 from functions.get_completion_with_function import get_completion_with_function
+from functions.get_arch_diagram import get_arch_diagram
 import json
 
 if st.session_state.status == "Conversation in Progress":
@@ -21,9 +22,10 @@ if st.session_state.status == "Conversation Complete":
     generate_diagram_prompt = create_generate_diagram_prompt(summary)
     mermaid_code = get_completion(generate_diagram_prompt)
     st.subheader("Architecture diagram")
-    st.write(mermaid_code)
-        # call Lucidchart API
-    
+    mermaid_code = mermaid_code.replace("`","").replace("mermaid","")
+    url = get_arch_diagram(mermaid_code)
+    st.image(image=url)
+
     # extract recommendations
     # define how we want the output to look
     function_schema = {
