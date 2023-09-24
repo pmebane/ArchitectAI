@@ -10,8 +10,8 @@ from st_pages import Page, show_pages
 show_pages(
     [
         Page("streamlit_app.py", "Chat"),
-        Page("pages/summary.py", "Summary"),
-        Page("pages/poc.py", "Testing Plan"),
+        Page("pages/summary.py", "Summary")
+        #,Page("pages/poc.py", "Testing Plan"),
     ]
 )
 
