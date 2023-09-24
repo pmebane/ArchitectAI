@@ -6,9 +6,6 @@ from functions.get_completion_from_message import get_completion_from_messages
 from prompts.poc_greeting import greeting
 import json
 
-if st.session_state.status == "Conversation in Progress":
-    st.write("Please complete the conversation on the Chat page")
-
 # Conversation complete, now work on the poc plan
 if st.session_state.status == "Conversation Complete":
     st.title("Testing Plan")
