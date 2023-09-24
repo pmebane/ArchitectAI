@@ -6,22 +6,19 @@ from functions.get_completion_from_message import get_completion_from_messages
 from prompts.poc_greeting import greeting
 import json
 
-if st.session_state.status == "Conversation in Progress":
-    st.write("Please complete the conversation on the Chat page")
-
 # Conversation complete, now work on the poc plan
-if st.session_state.status == "Conversation Complete":
-    st.title("Testing Plan")
-    # retrieve architecure summary and past chat history
-    # use it to generate poc
-    generate_summary_prompt = create_generate_summary_prompt(st.session_state.messages[1:])
-    summary = get_completion(generate_summary_prompt)
+
+st.title("Testing Plan")
+# retrieve architecure summary and past chat history
+# use it to generate poc
+generate_summary_prompt = create_generate_summary_prompt(st.session_state.messages[1:])
+summary = get_completion(generate_summary_prompt)
     
 
-    # generate poc plan 
-    generate_poc_summary = create_generate_poc_prompt(summary)
-    poc = get_completion(create_generate_poc_prompt)
-    
+# generate poc plan 
+generate_poc_summary = create_generate_poc_prompt(summary)
+poc = get_completion(create_generate_poc_prompt)
+
 #init poc convo
 st.session_state.messages = [{"role": "system", "content": poc}, {"role": "assistant", "content": greeting}]
 st.session_state.status = "Conversation in Progress"
