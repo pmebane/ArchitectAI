@@ -1,0 +1,1 @@
+greeting = "Now that we have defined the solution's architecture, let's figure out how we would like to test if this is the right solution. Here is what we propose, let's take a look and get feedback."
