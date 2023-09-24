@@ -1,32 +1,25 @@
 import streamlit as st
-from prompts.system_message import system_message
-from prompts.greeting import greeting
-from prompts.create_is_chat_complete_prompt import create_is_chat_complete_prompt
+from prompts.create_generate_summary_prompt import create_generate_summary_prompt
+from prompts.create_generate_poc_prompt import create_generate_poc_prompt
 from functions.get_completion import get_completion
 from functions.get_completion_from_message import get_completion_from_messages
-from st_pages import Page, show_pages
+import json
 
-# Specify what pages should be shown in the sidebar, and what their titles should be
-show_pages(
-    [
-        Page("streamlit_app.py", "Chat"),
-        Page("pages/summary.py", "Summary"),
-        Page("pages/poc.py", "Testing Planning"),
-    ]
-)
+if st.session_state.status == "Conversation in Progress":
+    st.write("Please complete the conversation on the Chat page")
 
-# initialize everything
-if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
-if "status" not in st.session_state.keys():
-    st.session_state.status = "Conversation in Progress"
+# Conversation complete, now generate assets
+if st.session_state.status == "Conversation Complete":
+    st.title("Testing Plan")
+    # retrieve architecure summary and past chat history
+    generate_summary_prompt = create_generate_summary_prompt(st.session_state.messages[1:])
+    summary = get_completion(generate_summary_prompt)
+    
 
-# Heading
-st.title('Welcome to ArchitectAI')
-
-if st.button("Clear History"):
-    st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
-    st.session_state.status = "Conversation in Progress"
+    # generate poc plan 
+    generate_poc_summary = create_generate_poc_prompt(summary)
+    poc = get_completion(create_generate_poc_prompt)
+    
 
 # Display previous chat messages
 for message in st.session_state.messages[1:]:
