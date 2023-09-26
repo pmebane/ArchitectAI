@@ -20,6 +20,9 @@ if st.session_state.status == "Conversation Complete":
         generate_summary_prompt = create_generate_summary_prompt(st.session_state.messages[1:])
         summary = get_completion(generate_summary_prompt)
         st.write(summary)
+        ## add summary to session state
+        if 'summary' not in st.session_state:
+            st.session_state['summary'] = summary
 
     st.subheader("Architecture diagram")
     with st.spinner("Generating..."):
