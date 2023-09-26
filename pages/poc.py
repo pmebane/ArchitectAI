@@ -5,19 +5,26 @@ from functions.get_completion import get_completion
 from functions.get_completion_from_message import get_completion_from_messages
 from prompts.poc_greeting import greeting
 import json
+from prompts.create_is_chat_complete_prompt import create_is_chat_complete_prompt
 
 # Conversation complete, now work on the poc plan
 
 st.title("Testing Plan")
-# retrieve architecure summary and past chat history
-# use it to generate poc
-generate_summary_prompt = create_generate_summary_prompt(st.session_state.messages[1:])
-summary = get_completion(generate_summary_prompt)
-    
 
-# generate poc plan 
-generate_poc_summary = create_generate_poc_prompt(summary)
-poc = get_completion(create_generate_poc_prompt)
+if st.session_state.status != "Summary Complete":
+    st.write("This will populate after you complete your summary with Archie on the summary page")
+
+
+    
+if st.session_state.status == "Summary Complete":
+    with st.spinner("Generating proof of concept/testing plan..."):
+        #generate testing plan
+        #get summary from session state
+        summary = st.session_state.summary
+        generate_poc_summary = create_generate_poc_prompt(summary)
+        poc = get_completion(generate_poc_summary)
+        st.write(poc)
+
 
 #init poc convo
 st.session_state.messages = [{"role": "system", "content": poc}, {"role": "assistant", "content": greeting}]
@@ -57,7 +64,7 @@ is_chat_complete_prompt = create_is_chat_complete_prompt(st.session_state.messag
 is_chat_complete = get_completion(is_chat_complete_prompt)
 #st.write("Is Chat Complete? = "+is_chat_complete)
 if  is_chat_complete == "Yes":
-    st.session_state.status = "Conversation Complete"
+    st.session_state.status = "POC Complete"
 
 
 
