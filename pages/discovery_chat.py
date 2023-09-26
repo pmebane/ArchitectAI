@@ -29,7 +29,7 @@ for message in st.session_state.messages[1:]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-# Add new user message
+# Add new  suser message
 if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):

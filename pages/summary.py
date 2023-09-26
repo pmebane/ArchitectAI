@@ -16,6 +16,8 @@ if st.session_state.status == "Conversation in Progress":
 # Conversation complete, now generate assets
 if st.session_state.status == "Conversation Complete":
     st.subheader("Architecture Overview")
+
+
     if "summary" not in st.session_state.keys():
         with st.spinner("Generating..."):
             # generate written description of architecture
@@ -25,6 +27,7 @@ if st.session_state.status == "Conversation Complete":
     else:
         summary = st.session_state.summary
     st.write(summary)
+
 
     st.subheader("Architecture diagram")
     if "arch_url" not in st.session_state.keys():
