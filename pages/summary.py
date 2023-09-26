@@ -107,4 +107,4 @@ if st.session_state.status == "Conversation Complete":
                 result = st.session_state.comparison
             st.write(result)
 
-st.session_state.status == "Summary Complete"
+st.session_state.status = "Summary Complete"
