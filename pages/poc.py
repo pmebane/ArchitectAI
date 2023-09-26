@@ -14,8 +14,6 @@ st.title("Testing Plan")
 if st.session_state.status != "Summary Complete":
     st.write("This will populate after you complete your summary with Archie on the summary page")
 
-
-    
 if st.session_state.status == "Summary Complete":
     with st.spinner("Generating proof of concept/testing plan..."):
         #generate testing plan
@@ -26,12 +24,7 @@ if st.session_state.status == "Summary Complete":
         st.write(poc)
 
 
-#init poc convo
-st.session_state.messages = [{"role": "system", "content": poc}, {"role": "assistant", "content": greeting}]
-st.session_state.status = "Conversation in Progress"
-
 with st.chat_message("assistant"):
-    with st.spinner("Generating POC Plan"):
         response = get_completion_from_messages(st.session_state.messages) 
         st.write(response) 
 message = {"role": "assistant", "content": response}
