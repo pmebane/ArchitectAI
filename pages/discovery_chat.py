@@ -15,6 +15,14 @@ if "status" not in st.session_state.keys():
 if st.button("Clear History"):
     st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
     st.session_state.status = "Conversation in Progress"
+    if "summary" in st.session_state.keys():
+        del st.session_state["summary"]
+    if "arch_url" in st.session_state.keys():
+        del st.session_state["arch_url"]
+    if "recommendations" in st.session_state.keys():
+        del st.session_state["recommendations"]
+    if "comparison" in st.session_state.keys():
+        del st.session_state["comparison"]
 
 # Display previous chat messages
 for message in st.session_state.messages[1:]:
@@ -39,6 +47,5 @@ if st.session_state.messages[-1]["role"] != "assistant":
 # Determine if conversation is over
 is_chat_complete_prompt = create_is_chat_complete_prompt(st.session_state.messages[1:])
 is_chat_complete = get_completion(is_chat_complete_prompt)
-#st.write("Is Chat Complete? = "+is_chat_complete)
 if  is_chat_complete == "Yes":
     st.session_state.status = "Conversation Complete"
