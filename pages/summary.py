@@ -26,6 +26,7 @@ if st.session_state.status == "Conversation Complete":
             st.session_state.summary = summary
     else:
         summary = st.session_state.summary
+        st.session_state.status = "Summary Complete"
     st.write(summary)
 
 
@@ -106,5 +107,3 @@ if st.session_state.status == "Conversation Complete":
             else:
                 result = st.session_state.comparison
             st.write(result)
-
-st.session_state.status = "Summary Complete"

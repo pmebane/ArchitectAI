@@ -21,11 +21,11 @@ if st.session_state.status == "Summary Complete":
         summary = st.session_state.summary
         generate_poc_summary = create_generate_poc_prompt(summary)
         poc = get_completion(generate_poc_summary)
-        st.write(poc)
+        ##st.write(poc)
 
 
 with st.chat_message("assistant"):
-        response = get_completion_from_messages(st.session_state.messages) 
+        response = get_completion(generate_poc_summary)
         st.write(response) 
 message = {"role": "assistant", "content": response}
 st.session_state.messages.append(message)
