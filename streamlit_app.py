@@ -1,5 +1,13 @@
 import streamlit as st
+from prompts.system_message import system_message
+from prompts.greeting import greeting
 from st_pages import Page, show_pages
+
+# initialize everything
+if "messages" not in st.session_state.keys():
+    st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
+if "status" not in st.session_state.keys():
+    st.session_state.status = "Conversation in Progress"
 
 # Specify what pages should be shown in the sidebar, and what their titles should be
 show_pages(
