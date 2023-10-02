@@ -7,7 +7,7 @@ show_pages(
         Page("streamlit_app.py", "Home"),
         Page("pages/discovery_chat.py", "Chat"),
         Page("pages/summary.py", "Summary"),
-        Page("pages/poc.py", "Testing Plan"),
+        Page("pages/poc2.py", "Testing Plan"),
         Page("pages/feedback.py", "Feedback"),
     ]
 )

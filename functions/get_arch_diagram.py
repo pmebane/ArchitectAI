@@ -1,5 +1,7 @@
 import base64
+import streamlit as st
 
+@st.cache_data
 def get_arch_diagram(graph):
   graphbytes = graph.encode("ascii")
   base64_bytes = base64.b64encode(graphbytes)

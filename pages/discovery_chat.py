@@ -44,8 +44,9 @@ if st.session_state.messages[-1]["role"] != "assistant":
     message = {"role": "assistant", "content": response}
     st.session_state.messages.append(message)
 
-# Determine if conversation is over
-is_chat_complete_prompt = create_is_chat_complete_prompt(st.session_state.messages[1:])
-is_chat_complete = get_completion(is_chat_complete_prompt)
-if  is_chat_complete == "Yes":
-    st.session_state.status = "Conversation Complete"
+if st.session_state.status == "Conversation in Progress":
+    # Determine if conversation is over
+    is_chat_complete_prompt = create_is_chat_complete_prompt(st.session_state.messages[1:])
+    is_chat_complete = get_completion(is_chat_complete_prompt)
+    if  is_chat_complete == "Yes":
+        st.session_state.status = "Conversation Complete"

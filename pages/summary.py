@@ -14,9 +14,8 @@ if st.session_state.status == "Conversation in Progress":
     st.write("This will populate after you complete your conversation with Archie on the Chat page")
 
 # Conversation complete, now generate assets
-if st.session_state.status == "Conversation Complete":
+if st.session_state.status != "Conversation in Progress":
     st.subheader("Architecture Overview")
-
 
     if "summary" not in st.session_state.keys():
         with st.spinner("Generating..."):
@@ -99,11 +98,10 @@ if st.session_state.status == "Conversation Complete":
                 vendor_reasoning = vendors["reasoning"]
                 st.write(f"**{vendor}:** {vendor_reasoning}")
             st.subheader("How You Choose")
-            if "comparison" not in st.session_state.keys():
-                with st.spinner("Generating..."):
-                    prompt = create_vendor_comparison_prompt(vendor_list)
-                    result = get_completion(prompt=prompt)
-                    st.session_state.comparison = result
-            else:
-                result = st.session_state.comparison
+            with st.spinner("Generating..."):
+                prompt = create_vendor_comparison_prompt(vendor_list)
+                result = get_completion(prompt=prompt)
+                st.session_state.comparison = result
             st.write(result)
+
+    st.session_state.status = "Summary Complete"
