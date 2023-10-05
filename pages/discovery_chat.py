@@ -6,11 +6,6 @@ from functions.get_completion_from_message import get_completion_from_messages
 import streamlit as st
 
 st.title("Chat")
-# initialize everything
-if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
-if "status" not in st.session_state.keys():
-    st.session_state.status = "Conversation in Progress"
 
 if st.button("Clear History"):
     st.session_state.messages = [{"role": "system", "content": system_message}, {"role": "assistant", "content": greeting}]
@@ -24,12 +19,15 @@ if st.button("Clear History"):
     if "comparison" in st.session_state.keys():
         del st.session_state["comparison"]
 
+if st.button("Testing Mode"):
+    st.session_state.messages = [{'role': 'system','content': f'{system_message}'}, {'role': 'assistant', 'content': "Hello! I'm Archie the Architect. I can help you determine what technologies you need for your data architecture. Could you please tell me a bit about your project?"}, {'role': 'user', 'content': 'i want to visualize my marketing data'}, {'role': 'assistant', 'content': "Great! To help you better, I need to understand a few things about your data and requirements. Let's start with the type of data you're working with. Is it structured (like CSVs), semi-structured (like JSON or XML), or unstructured (like PDFs or MP4s)?"}, {'role': 'user', 'content': 'it is structured'}, {'role': 'assistant', 'content': 'Excellent! Structured data is easier to work with. Now, could you please tell me about your latency requirements? In other words, how quickly do you need to access your data?'}, {'role': 'user', 'content': 'it needs to be updated daily'}, {'role': 'assistant', 'content': 'Understood, daily updates it is. Now, are you planning on doing any predictive analytics or machine learning with your data?'}, {'role': 'user', 'content': 'no'}, {'role': 'assistant', 'content': "Alright, no predictive analytics. Could you please tell me how much data you're working with?"}, {'role': 'user', 'content': '100GB'}, {'role': 'assistant', 'content': 'Thanks for the information. Lastly, does your data need to be manipulated in any way, such as deduplication, transformation, etc?'}, {'role': 'user', 'content': 'no '}, {'role': 'assistant', 'content': "Great! Based on the information you've provided, here are my technology recommendations:\n\n1. **Batch Ingestion**: Since your data is updated daily and not in real-time, batch ingestion would be a suitable method to bring your data into the system.\n\n2. **Data Warehouse**: Given that you're working with structured data and you don't need to perform any transformations, a data warehouse would be a good fit. It will allow you to store your data in a structured format and perform efficient queries.\n\n3. **Visualization Tool**: Since you mentioned you want to visualize your marketing data, a visualization tool would be necessary. This will allow you to create charts, graphs, and other visual representations of your data.\n\nWould you like me to generate vendor recommendations for all of these technologies, or just a few of them? If it's just a few, please specify which ones."}, {'role': 'user', 'content': 'all of them'}, {'role': 'assistant', 'content': "Great! To provide the best vendor recommendations, I need to understand a bit more about your preferences and requirements. \n\nLet's start with this: Which two of these do you value the most: ease of use, cost, or scalability/performance?"}, {'role': 'user', 'content': 'ease of use and cost'}, {'role': 'assistant', 'content': 'Understood, you value ease of use and cost. Now, could you please tell me what other tools your vendor recommendations will have to integrate with? Examples include data sources, cloud vendors, etc.'}, {'role': 'user', 'content': 'The data will have to be extracted from Facebook Ads and Google Ads. We have other services on AWS'}, {'role': 'assistant', 'content': "Thanks for sharing that. It's important to ensure that the tools we choose can integrate well with Facebook Ads, Google Ads, and AWS. \n\nNext, do you prefer if the tools are cloud-native? If yes, is it important to have a tool that can support multi-cloud deployments?"}, {'role': 'user', 'content': 'Yes we prefer if they are cloud-native but it is not important that they support multi-cloud deployments'}, {'role': 'assistant', 'content': 'Got it, cloud-native but no need for multi-cloud support. Lastly, could you please tell me about the technical skills your team has? For example, any cloud vendors that they have expertise in, languages they know, etc.'}, {'role': 'user', 'content': 'They have knowledge of AWS. From a languages standpoint, they know SQL and python'}]
+
 # Display previous chat messages
 for message in st.session_state.messages[1:]:
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
-# Add new  suser message
+# Add new user message
 if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):

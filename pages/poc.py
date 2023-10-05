@@ -1,5 +1,7 @@
 import streamlit as st
-from prompts.create_generate_poc_plan_prompt import create_generate_poc_plan_prompt
+from prompts.create_generate_poc_goals_prompt import create_generate_poc_goals_prompt
+from prompts.create_generate_poc_requirements_prompt import create_generate_poc_requirements_prompt
+from prompts.create_generate_poc_eval_prompt import create_generate_poc_eval_prompt
 from functions.get_completion import get_completion
 
 # Conversation complete, now work on the poc plan
@@ -21,11 +23,10 @@ if st.session_state.status == "Summary Complete":
         project_requirements = get_completion(prompt=prompt)
     st.write(project_requirements)
     st.header("Evaluation Plan")
-    i = 0
-    for tool in st.session_state.tech_recommendations:
+    for index, tool in enumerate(st.session_state.tech_recommendations):
         st.subheader(tool)
         with st.spinner("Generating..."):
-            prompt = create_generate_poc_eval_prompt(st.session_state.vendor_recommendations[i], project_requirements) # create evaluation plan for each group of technologies
+            prompt = create_generate_poc_eval_prompt(st.session_state.vendor_recommendations[index], project_requirements) # create evaluation plan for each group of technologies
             evaluation_plan = get_completion(prompt=prompt)
         st.write(evaluation_plan)
 

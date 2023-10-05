@@ -87,7 +87,7 @@ if st.session_state.status != "Conversation in Progress":
             vendor_list.append(vendor_list_2) # create list of vendor lists
             st.subheader("How You Choose")
             with st.spinner("Generating..."):
-                prompt = create_vendor_comparison_prompt(vendor_list)
+                prompt = create_vendor_comparison_prompt(vendor_list_2)
                 comparison = get_completion(prompt=prompt)
             st.write(comparison) 
 
@@ -96,4 +96,5 @@ if st.session_state.status != "Conversation in Progress":
     st.session_state.recommendations = cleaned_recommendations
     st.session_state.tech_recommendations = tech_list
     st.session_state.vendor_recommendations = vendor_list
-    st.session_state.status = "Summary Complete"
+    if st.session_state.status == "Conversation Complete":
+        st.session_state.status = "Summary Complete"
