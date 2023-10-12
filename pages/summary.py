@@ -7,6 +7,7 @@ from functions.get_completion import get_completion
 from functions.get_completion_with_function import get_completion_with_function
 from functions.get_arch_diagram import get_arch_diagram
 import json
+from functions.get_s3_conn import upload_to_s3
 
 st.title("Solution Overview")
 
@@ -98,3 +99,7 @@ if st.session_state.status != "Conversation in Progress":
     st.session_state.vendor_recommendations = vendor_list
     if st.session_state.status == "Conversation Complete":
         st.session_state.status = "Summary Complete"
+    try:
+        upload_to_s3('summary', st.session_state)
+    except Exception as e:
+        False  
