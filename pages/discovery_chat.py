@@ -4,6 +4,7 @@ from prompts.create_is_chat_complete_prompt import create_is_chat_complete_promp
 from functions.get_completion import get_completion
 from functions.get_completion_from_message import get_completion_from_messages
 import streamlit as st
+from functions.get_s3_conn import upload_to_s3
 
 st.title("Chat")
 
@@ -48,3 +49,8 @@ if st.session_state.status == "Conversation in Progress":
     is_chat_complete = get_completion(is_chat_complete_prompt)
     if  is_chat_complete == "Yes":
         st.session_state.status = "Conversation Complete"
+
+    try:
+        upload_to_s3('discovery', st.session_state)
+    except Exception as e:
+        False

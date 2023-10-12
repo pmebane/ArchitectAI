@@ -3,6 +3,7 @@ from prompts.create_generate_poc_goals_prompt import create_generate_poc_goals_p
 from prompts.create_generate_poc_requirements_prompt import create_generate_poc_requirements_prompt
 from prompts.create_generate_poc_eval_prompt import create_generate_poc_eval_prompt
 from functions.get_completion import get_completion
+from functions.get_s3_conn import upload_to_s3
 
 # Conversation complete, now work on the poc plan
 
@@ -38,7 +39,10 @@ if st.session_state.status == "Summary Complete":
         evaluation_plan = get_completion(prompt=prompt)
     st.write(evaluation_plan)
 
-    
+try:
+    upload_to_s3('poc', st.session_state)
+except Exception as e:
+    False  
 
 
 
