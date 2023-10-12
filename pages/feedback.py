@@ -18,4 +18,4 @@ if submitted:
     try:
         upload_to_s3('feedback', feedback)
     except Exception as e:
-        e  
+        pass
