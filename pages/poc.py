@@ -42,7 +42,7 @@ if st.session_state.status == "Summary Complete":
 try:
     upload_to_s3('poc', st.session_state)
 except Exception as e:
-    False  
+    e  
 
 
 
