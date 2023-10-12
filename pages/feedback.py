@@ -9,13 +9,7 @@ with st.form("feedback_form"):
     feedback = st.text_area("Give us some feedback! Good or bad, we'd love to hear it.")
     submitted = st.form_submit_button("Submit")
 if submitted:
-    feedback = {
-    "name":name,
-    "email":email,
-    "phone":phone,
-    "feedback":feedback
-    }
     try:
-        upload_to_s3('feedback', feedback)
+        upload_to_s3('feedback', {k: v for k, v in st.session_state.items()})
     except Exception as e:
         pass
