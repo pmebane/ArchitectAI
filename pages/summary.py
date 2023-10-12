@@ -102,4 +102,4 @@ if st.session_state.status != "Conversation in Progress":
     try:
         upload_to_s3('summary', st.session_state)
     except Exception as e:
-        False  
+        e  
