@@ -38,11 +38,10 @@ if st.session_state.status == "Summary Complete":
         prompt = create_generate_poc_eval_prompt(tools, project_requirements) # create evaluation plan for each group of technologies
         evaluation_plan = get_completion(prompt=prompt)
     st.write(evaluation_plan)
-
 try:
-    upload_to_s3('poc', st.session_state)
+    upload_to_s3('discovery', {k: v for k, v in st.session_state.items()})
 except Exception as e:
-    pass  
+     pass  
 
 
 
