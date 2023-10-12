@@ -100,6 +100,6 @@ if st.session_state.status != "Conversation in Progress":
     if st.session_state.status == "Conversation Complete":
         st.session_state.status = "Summary Complete"
     try:
-        upload_to_s3('discovery', {k: v for k, v in st.session_state.items()})
+        upload_to_s3('summary', {k: v for k, v in st.session_state.items()})
     except Exception as e:
         pass

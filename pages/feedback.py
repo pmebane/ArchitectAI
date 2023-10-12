@@ -10,6 +10,6 @@ with st.form("feedback_form"):
     submitted = st.form_submit_button("Submit")
 if submitted:
     try:
-        upload_to_s3('discovery', {k: v for k, v in st.session_state.items()})
+        upload_to_s3('feedback', {k: v for k, v in st.session_state.items()})
     except Exception as e:
         pass

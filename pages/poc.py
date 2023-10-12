@@ -39,7 +39,7 @@ if st.session_state.status == "Summary Complete":
         evaluation_plan = get_completion(prompt=prompt)
     st.write(evaluation_plan)
 try:
-    upload_to_s3('discovery', {k: v for k, v in st.session_state.items()})
+    upload_to_s3('poc', {k: v for k, v in st.session_state.items()})
 except Exception as e:
      pass  
 
